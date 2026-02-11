@@ -435,9 +435,9 @@ type:"choose",
 t:"____ several swimmers practising daily in the indoor pool this week.",
 a:"There are",
 opts:["There is","There are","There was","There were"]
-}
-
- // END BLOCK 1
+},
+ 
+// END BLOCK 1
 /* ----------------------------- */
 /* 100 NEGATIVE (CHOOSE)         */
 /* ----------------------------- */
@@ -843,7 +843,7 @@ type:"choose",
 t:"____ a photographer taking pictures today; the event was cancelled.",
 a:"There isn’t",
 opts:["There isn’t","There aren’t","There wasn’t","There weren’t"]
-}
+};
 
  // END BLOCK 2
 /* ----------------------------- */
@@ -1588,8 +1588,9 @@ a:"Where were there athletes running energetically on the track yesterday?"
 },
 {
 type:"order",
-t:"Order the WH‑question:",
+t:"Order the WH-question:",
 a:"Why is there a friendly dog wagging its tail excitedly near the door?"
 }
 
-]; // END BLOCK 4
+];
+
