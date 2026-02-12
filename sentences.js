@@ -1211,13 +1211,12 @@ a:"Why is there a doctor checking the patient’s heartbeat gently this afternoo
 type:"order",
 t:"Order the WH‑question:",
 a:"Where are there swimmers practising daily in the indoor pool?"
-}
+},
 
 // END BLOCK 3
 /* ----------------------------- */
 /* 100 EXTRA MIXED SENTENCES     */
 /* ----------------------------- */
-
 {
 type:"choose",
 t:"____ a friendly paramedic helping a cyclist with an injured leg near the park entrance this morning.",
