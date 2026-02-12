@@ -1,151 +1,676 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-<title>Past Tense Practice 1 — Streak to 25</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Past Tense Practice 1 — Streak to 25</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
 
-<!-- ⚠️ TODO TU CSS ORIGINAL SE MANTIENE IGUAL -->
-<!-- (Lo omito aquí solo para no duplicar 2000 líneas) -->
+  <style>
+    :root{
+      --bg-dark:#0f172a;
+      --bg-card:#f8fafc;
+      --accent:#3b82f6;
+      --green:#22c55e;
+      --red:#ef4444;
+      --orange:#fb923c;
+      --chip:#f97316;
+      --chip-text:#ffffff;
+      --border-soft:#e2e8f0;
+      --muted:#64748b;
+    }
 
+    *{
+      box-sizing:border-box;
+    }
+
+    html,body{
+      margin:0;
+      padding:0;
+      height:100%;
+      font-family:"Nunito",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:var(--bg-dark);
+      color:#0f172a;
+    }
+
+    body{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px;
+    }
+
+    .app{
+      width:100%;
+      max-width:960px;
+    }
+
+    #game{
+      background:var(--bg-card);
+      border-radius:20px;
+      padding:16px 18px 20px;
+      box-shadow:0 20px 40px rgba(15,23,42,0.55);
+    }
+
+    @media (min-width:768px){
+      #game{
+        padding:20px 24px 24px;
+      }
+    }
+
+    .title{
+      text-align:center;
+      font-size:1.2rem;
+      font-weight:800;
+      letter-spacing:0.04em;
+      text-transform:uppercase;
+      color:var(--muted);
+      margin-bottom:8px;
+    }
+
+    .subtitle{
+      text-align:center;
+      font-size:.95rem;
+      color:var(--muted);
+      margin-bottom:16px;
+    }
+
+    .top-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      justify-content:center;
+      margin-bottom:10px;
+    }
+
+    .stat{
+      padding:4px 10px;
+      border-radius:999px;
+      background:#e2e8f0;
+      font-size:.8rem;
+      white-space:nowrap;
+    }
+
+    .progress{
+      margin-bottom:14px;
+    }
+
+    .progress-track{
+      width:100%;
+      height:10px;
+      background:#e2e8f0;
+      border-radius:999px;
+      overflow:hidden;
+      margin-bottom:4px;
+    }
+
+    .progress-bar{
+      height:100%;
+      width:0%;
+      background:var(--green);
+      transition:width .25s ease-out;
+    }
+
+    .progress-label{
+      font-size:.8rem;
+      color:var(--muted);
+      text-align:right;
+    }
+
+    .card{
+      background:#e5e7eb;
+      border-radius:18px;
+      padding:12px 14px;
+      margin-bottom:14px;
+    }
+
+    @media (min-width:768px){
+      .card{
+        padding:14px 18px;
+      }
+    }
+
+    .card-label{
+      font-size:.85rem;
+      font-weight:700;
+      letter-spacing:.03em;
+      text-transform:uppercase;
+      color:var(--muted);
+      margin-bottom:4px;
+    }
+
+    .card-text{
+      font-size:1.05rem;
+      line-height:1.4;
+      font-weight:600;
+      color:#111827;
+    }
+
+    .options{
+      min-height:80px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      margin-bottom:14px;
+    }
+
+    .choice-btn{
+      border:none;
+      border-radius:999px;
+      padding:8px 12px;
+      margin:3px;
+      cursor:pointer;
+      font-size:.95rem;
+      font-weight:600;
+      background:#e0e7ff;
+      color:#111827;
+      transition:transform .1s ease, box-shadow .1s ease, background-color .15s ease;
+      box-shadow:0 1px 0 rgba(15,23,42,0.12);
+    }
+
+    .choice-btn:hover{
+      transform:translateY(-1px);
+      box-shadow:0 4px 10px rgba(15,23,42,0.18);
+    }
+
+    .choice-btn.correct{
+      background:#bbf7d0;
+      box-shadow:0 0 0 2px var(--green);
+    }
+
+    .choice-btn.wrong{
+      background:#fecaca;
+      box-shadow:0 0 0 2px var(--red);
+    }
+
+    .answer-area,
+    .word-bank{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      padding:8px;
+      border-radius:14px;
+      min-height:44px;
+      border:1px dashed var(--border-soft);
+      background:#edf2ff;
+    }
+
+    .word-bank{
+      background:#f1f5f9;
+    }
+
+    .answer-area.correct{
+      box-shadow:0 0 0 2px var(--green);
+    }
+
+    .answer-area.wrong{
+      box-shadow:0 0 0 2px var(--red);
+    }
+
+    .chip{
+      border:none;
+      border-radius:999px;
+      padding:6px 10px;
+      font-size:.9rem;
+      font-weight:600;
+      cursor:pointer;
+      background:var(--chip);
+      color:var(--chip-text);
+      box-shadow:0 1px 0 rgba(15,23,42,0.2);
+      transition:transform .1s ease, box-shadow .1s ease, background-color .15s ease;
+    }
+
+    .chip:hover{
+      transform:translateY(-1px);
+      box-shadow:0 4px 8px rgba(15,23,42,0.25);
+      background:#fb923c;
+    }
+
+    .controls-row{
+      display:flex;
+      gap:8px;
+      justify-content:flex-end;
+      margin-top:2px;
+    }
+
+    .buttons-row{
+      display:flex;
+      justify-content:center;
+      gap:10px;
+    }
+
+    button.primary,
+    button.secondary{
+      border-radius:999px;
+      padding:8px 18px;
+      border:none;
+      font-size:.95rem;
+      font-weight:700;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:6px;
+      box-shadow:0 2px 8px rgba(15,23,42,0.3);
+      transition:transform .1s ease, box-shadow .1s ease, background-color .15s ease;
+    }
+
+    button.primary{
+      background:var(--accent);
+      color:white;
+    }
+
+    button.secondary{
+      background:#e5e7eb;
+      color:#111827;
+    }
+
+    button.primary:hover,
+    button.secondary:hover{
+      transform:translateY(-1px);
+      box-shadow:0 4px 10px rgba(15,23,42,0.35);
+    }
+
+    button.primary:active,
+    button.secondary:active{
+      transform:translateY(0);
+      box-shadow:0 2px 5px rgba(15,23,42,0.3);
+    }
+
+    /* Overlay win screen */
+    .overlay{
+      position:fixed;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(15,23,42,0.82);
+      z-index:40;
+    }
+
+    .overlay.hidden{
+      display:none;
+    }
+
+    .overlay-content{
+      background:#f9fafb;
+      border-radius:20px;
+      padding:22px 18px 18px;
+      max-width:320px;
+      width:90%;
+      text-align:center;
+      box-shadow:0 20px 50px rgba(15,23,42,0.75);
+    }
+
+    .overlay-content h2{
+      margin:0 0 8px;
+      font-size:1.3rem;
+    }
+
+    .overlay-content p{
+      margin:0 0 14px;
+      font-size:.95rem;
+      color:var(--muted);
+    }
+  </style>
 </head>
 
 <body>
+  <div class="app">
+    <main id="game">
+      <div class="title">Past Tense Practice 1</div>
+      <div class="subtitle">Get a streak of 25 correct answers in a row.</div>
 
-<!-- TODO TU HTML ORIGINAL SE MANTIENE EXACTAMENTE IGUAL -->
-<!-- NO CAMBIO NADA DE TU ESTRUCTURA -->
+      <div class="top-row">
+        <div id="scoreBox" class="stat">Score: 0</div>
+        <div id="streakBox" class="stat">Streak: 0</div>
+        <div id="mistakesBox" class="stat">Mistakes: 0</div>
+        <div id="timerBox" class="stat">Time: 0 s</div>
+      </div>
 
-<script src="sentences.js"></script>
+      <div class="progress">
+        <div class="progress-track">
+          <div id="progressBar" class="progress-bar"></div>
+        </div>
+        <div id="progressLabel" class="progress-label">
+          Progress: 0 / 25 (0%)
+        </div>
+      </div>
 
-<script>
-/* =============================
-   CORE GAME ENGINE (MINIMAL FIX)
-============================= */
+      <section class="card">
+        <div id="cardLabel" class="card-label">Past Tense Practice — Streak to 25</div>
+        <div id="cardText" class="card-text">
+          Press START to begin.
+        </div>
+      </section>
 
-const TARGET_STREAK = 25;
-const el = id => document.getElementById(id);
+      <section id="options" class="options">
+        <!-- Dynamic content -->
+      </section>
 
-let score = 0;
-let streak = 0;
-let timer = 0;
-let timerInterval = null;
-let currentQuestion = null;
-let running = false;
+      <div class="buttons-row">
+        <button id="startBtn" class="primary">START</button>
+        <button id="resetBtn" class="secondary">RESET</button>
+      </div>
+    </main>
 
-/* ELEMENTS */
-const startBtn = el("startBtn");
-const resetBtn = el("resetBtn");
-const scoreBox = el("scoreBox");
-const streakBox = el("streakBox");
-const timerBox = el("timerBox");
-const progressBar = el("progressBar");
-const progressLabel = el("progressLabel");
-const cardText = el("cardText");
-const cardLabel = el("cardLabel");
-const optionsBox = el("options");
+    <div id="winOverlay" class="overlay hidden">
+      <div class="overlay-content">
+        <h2>Great job!</h2>
+        <p id="winMessage">You reached a streak!</p>
+        <button id="playAgainBtn" class="primary">Play again</button>
+      </div>
+    </div>
+  </div>
 
-/* START */
-startBtn.addEventListener("click", () => {
-  if(running) return;
+  <!-- Question bank -->
+  <script src="sentences.js"></script>
 
-  if(!window.BANK || !Array.isArray(BANK) || BANK.length === 0){
-    alert("sentences.js not loaded correctly.");
-    return;
-  }
+  <!-- Game engine -->
+  <script>
+    (function(){
+      const TARGET_STREAK = 25;
+      const el = id => document.getElementById(id);
 
-  running = true;
-  score = 0;
-  streak = 0;
-  timer = 0;
+      const startBtn = el("startBtn");
+      const resetBtn = el("resetBtn");
 
-  updateStats();
-  updateProgress();
-  nextQuestion();
+      const scoreBox = el("scoreBox");
+      const streakBox = el("streakBox");
+      const mistakesBox = el("mistakesBox");
+      const timerBox = el("timerBox");
 
-  timerInterval = setInterval(()=>{
-    timer++;
-    timerBox.textContent = "Time: " + timer + "s";
-  },1000);
-});
+      const progressBar = el("progressBar");
+      const progressLabel = el("progressLabel");
 
-/* RESET */
-resetBtn.addEventListener("click", resetGame);
+      const cardLabel = el("cardLabel");
+      const cardText  = el("cardText");
+      const optionsBox = el("options");
 
-function resetGame(){
-  running = false;
-  clearInterval(timerInterval);
+      const winOverlay   = el("winOverlay");
+      const winMessage   = el("winMessage");
+      const playAgainBtn = el("playAgainBtn");
 
-  score = 0;
-  streak = 0;
-  timer = 0;
+      let score = 0;
+      let streak = 0;
+      let mistakes = 0;
+      let timer = 0;
+      let timerInterval = null;
+      let running = false;
+      let remainingIndices = [];
+      let currentIndex = null;
+      let currentQuestion = null;
 
-  cardLabel.textContent = "Ready";
-  cardText.textContent = "Press START to begin your practice!";
-  optionsBox.innerHTML = "";
+      const correctSound = new Audio("AUDIO/tadaa.mp3");
+      const wrongSound   = new Audio("AUDIO/koala3.mp3");
 
-  progressBar.style.width = "0%";
-  progressLabel.textContent = "Progress: 0 / 25 (0%)";
+      function shuffle(arr){
+        for(let i = arr.length - 1; i > 0; i--){
+          const j = Math.floor(Math.random() * (i + 1));
+          [arr[i], arr[j]] = [arr[j], arr[i]];
+        }
+        return arr;
+      }
 
-  updateStats();
-}
+      function resetStats(){
+        score = 0;
+        streak = 0;
+        mistakes = 0;
+        timer = 0;
+      }
 
-/* NEXT QUESTION */
-function nextQuestion(){
-  optionsBox.innerHTML = "";
+      function updateStats(){
+        scoreBox.textContent    = "Score: " " + score;
+        streakBox.textContent   = "Streak: " + streak;
+        mistakesBox.textContent = "Mistakes: " + mistakes;
+        timerBox.textContent    = "Time: " + timer + " s";
 
-  currentQuestion = BANK[Math.floor(Math.random()*BANK.length)];
+        const percent = Math.min(100, Math.round((streak / TARGET_STREAK) * 100));
+        progressBar.style.width = percent + "%";
+        progressLabel.textContent =
+          "Progress: " + streak + " / " + TARGET_STREAK + " (" + percent + "%)";
+      }
 
-  cardLabel.textContent = "Choose the correct answer";
-  cardText.textContent = currentQuestion.question;
+      function startTimer(){
+        if(timerInterval) clearInterval(timerInterval);
+        timerInterval = setInterval(() => {
+          if(!running) return;
+          timer += 1;
+          timerBox.textContent = "Time: " + timer + " s";
+        }, 1000);
+      }
 
-  currentQuestion.choices.forEach(choice=>{
-    const btn = document.createElement("button");
-    btn.className = "choiceCard";
-    btn.textContent = choice;
-    btn.onclick = ()=> checkAnswer(choice);
-    optionsBox.appendChild(btn);
-  });
-}
+      function stopTimer(){
+        if(timerInterval){
+          clearInterval(timerInterval);
+          timerInterval = null;
+        }
+      }
 
-/* CHECK ANSWER */
-function checkAnswer(choice){
-  if(!running) return;
+      function refillIndices(){
+        if(!window.BANK || !Array.isArray(BANK) || BANK.length === 0){
+          alert("sentences.js not loaded or BANK is empty.");
+          running = false;
+          return;
+        }
+        remainingIndices = shuffle(BANK.map((_, i) => i));
+      }
 
-  if(choice === currentQuestion.answer){
-    score++;
-    streak++;
-  } else {
-    streak = 0;
-  }
+      function playCorrect(){
+        try{
+          correctSound.currentTime = 0;
+          correctSound.play();
+        }catch(e){}
+      }
 
-  updateStats();
-  updateProgress();
+      function playWrong(){
+        try{
+          wrongSound.currentTime = 0;
+          wrongSound.play();
+        }catch(e){}
+      }
 
-  if(streak >= TARGET_STREAK){
-    alert("🎉 Perfect Streak! You reached 25!");
-    resetGame();
-    return;
-  }
+      function showWin(){
+        running = false;
+        stopTimer();
+        winMessage.textContent =
+          "You reached a streak of " + streak + " correct answers in a row!";
+        winOverlay.classList.remove("hidden");
+      }
 
-  nextQuestion();
-}
+      function nextQuestion(){
+        if(!running) return;
+        if(streak >= TARGET_STREAK){
+          showWin();
+          return;
+        }
+        if(remainingIndices.length === 0){
+          refillIndices();
+        }
+        if(remainingIndices.length === 0){
+          return;
+        }
+        currentIndex = remainingIndices.pop();
+        currentQuestion = BANK[currentIndex];
+        renderQuestion(currentQuestion);
+      }
 
-/* UPDATE */
-function updateStats(){
-  scoreBox.textContent = "Score: " + score;
-  streakBox.textContent = "Streak: " + streak;
-}
+      function renderQuestion(q){
+        optionsBox.innerHTML = "";
+        if(q.type === "choose"){
+          renderChoose(q);
+        }else if(q.type === "order"){
+          renderOrder(q);
+        }else{
+          cardLabel.textContent = "Unknown question type";
+          cardText.textContent = "";
+        }
+      }
 
-function updateProgress(){
-  const percent = (streak / TARGET_STREAK) * 100;
-  progressBar.style.width = percent + "%";
-  progressLabel.textContent =
-    `Progress: ${streak} / ${TARGET_STREAK} (${Math.floor(percent)}%)`;
-}
+      function renderChoose(q){
+        cardLabel.textContent = "Choose the correct option:";
+        cardText.textContent = q.t;
 
-</script>
+        const shuffledOpts = shuffle(q.opts.slice());
+        shuffledOpts.forEach(opt => {
+          const btn = document.createElement("button");
+          btn.className = "choice-btn";
+          btn.textContent = opt;
 
+          btn.addEventListener("click", () => {
+            if(!running) return;
+
+            const isCorrect = opt === q.a;
+            if(isCorrect){
+              btn.classList.add("correct");
+              playCorrect();
+              score += 1;
+              streak += 1;
+            }else{
+              btn.classList.add("wrong");
+              playWrong();
+              mistakes += 1;
+              streak = 0;
+
+              Array.from(optionsBox.children).forEach(b => {
+                if(b.textContent === q.a){
+                  b.classList.add("correct");
+                }
+              });
+            }
+
+            updateStats();
+
+            setTimeout(() => {
+              nextQuestion();
+            }, 700);
+          });
+
+          optionsBox.appendChild(btn);
+        });
+      }
+
+      function renderOrder(q){
+        cardLabel.textContent = q.t || "Order the sentence:";
+        cardText.textContent = "Tap the words in the correct order, then press CHECK.";
+
+        const answerArea = document.createElement("div");
+        answerArea.className = "answer-area";
+
+        const bankArea = document.createElement("div");
+        bankArea.className = "word-bank";
+
+        optionsBox.appendChild(answerArea);
+        optionsBox.appendChild(bankArea);
+
+        const tokens = q.a.split(" ");
+        const shuffledTokens = shuffle(tokens.slice());
+
+        function makeChip(word){
+          const chip = document.createElement("button");
+          chip.className = "chip";
+          chip.textContent = word;
+          chip.addEventListener("click", () => {
+            if(!running) return;
+            const parent = chip.parentElement;
+            if(parent === bankArea){
+              answerArea.appendChild(chip);
+            }else{
+              bankArea.appendChild(chip);
+            }
+          });
+          return chip;
+        }
+
+        shuffledTokens.forEach(word => {
+          bankArea.appendChild(makeChip(word));
+        });
+
+        const controlsRow = document.createElement("div");
+        controlsRow.className = "controls-row";
+
+        const checkBtn = document.createElement("button");
+        checkBtn.className = "primary";
+        checkBtn.textContent = "Check";
+
+        const clearBtn = document.createElement("button");
+        clearBtn.className = "secondary";
+        clearBtn.textContent = "Clear";
+
+        controlsRow.appendChild(checkBtn);
+        controlsRow.appendChild(clearBtn);
+        optionsBox.appendChild(controlsRow);
+
+        clearBtn.addEventListener("click", () => {
+          const chips = Array.from(answerArea.children);
+          chips.forEach(chip => bankArea.appendChild(chip));
+        });
+
+        checkBtn.addEventListener("click", () => {
+          if(!running) return;
+
+          const answer = Array.from(answerArea.children)
+            .map(chip => chip.textContent)
+            .join(" ")
+            .trim();
+          const correctAnswer = q.a.trim();
+          const isCorrect = (answer.length > 0 && answer === correctAnswer);
+
+          if(isCorrect){
+            answerArea.classList.add("correct");
+            playCorrect();
+            score += 1;
+            streak += 1;
+          }else{
+            answerArea.classList.add("wrong");
+            playWrong();
+            mistakes += 1;
+            streak = 0;
+          }
+
+          updateStats();
+
+          setTimeout(() => {
+            answerArea.classList.remove("correct", "wrong");
+            nextQuestion();
+          }, 800);
+        });
+      }
+
+      function startGame(){
+        if(running) return;
+        resetStats();
+        running = true;
+        winOverlay.classList.add("hidden");
+        cardLabel.textContent = "Game on!";
+        cardText.textContent = "Answer correctly to build your streak.";
+        refillIndices();
+        updateStats();
+        startTimer();
+        nextQuestion();
+      }
+
+      function resetGame(){
+        running = false;
+        stopTimer();
+        resetStats();
+        remainingIndices = [];
+        currentQuestion = null;
+        optionsBox.innerHTML = "";
+        cardLabel.textContent = "Past Tense Practice — Streak to 25";
+        cardText.textContent = "Press START to begin.";
+        updateStats();
+        winOverlay.classList.add("hidden");
+      }
+
+      startBtn.addEventListener("click", startGame);
+      resetBtn.addEventListener("click", resetGame);
+      playAgainBtn.addEventListener("click", startGame);
+
+      // initial state
+      resetGame();
+    })();
+  </script>
 </body>
 </html>
