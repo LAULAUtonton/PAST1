@@ -843,9 +843,8 @@ type:"choose",
 t:"____ a photographer taking pictures today; the event was cancelled.",
 a:"There isn’t",
 opts:["There isn’t","There aren’t","There wasn’t","There weren’t"]
-};
-
- // END BLOCK 2
+}, 
+// END BLOCK 2
 /* ----------------------------- */
 /* 100 WH‑QUESTIONS (ORDER)      */
 /* ----------------------------- */
