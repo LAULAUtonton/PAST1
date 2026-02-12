@@ -418,17 +418,20 @@
         streak = 0;
         mistakes = 0;
         timer = 0;
-    function updateStats(){
-  scoreBox.textContent    = "Score: " + score;
-  streakBox.textContent   = "Streak: " + streak;
-  mistakesBox.textContent = "Mistakes: " + mistakes;
-  timerBox.textContent    = "Time: " + timer + " s";
+      }
 
-  const percent = Math.min(100, Math.round((streak / TARGET_STREAK) * 100));
-  progressBar.style.width = percent + "%";
-  progressLabel.textContent =
-    "Progress: " + streak + " / " + TARGET_STREAK + " (" + percent + "%)";
-}
+      function updateStats(){
+        scoreBox.textContent    = "Score: " + score;
+        streakBox.textContent   = "Streak: " + streak;
+        mistakesBox.textContent = "Mistakes: " + mistakes;
+        timerBox.textContent    = "Time: " + timer + " s";
+
+        const percent = Math.min(100, Math.round((streak / TARGET_STREAK) * 100));
+        progressBar.style.width = percent + "%";
+        progressLabel.textContent =
+          "Progress: " + streak + " / " + TARGET_STREAK + " (" + percent + "%)";
+      }
+
       function startTimer(){
         if(timerInterval) clearInterval(timerInterval);
         timerInterval = setInterval(() => {
